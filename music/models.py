@@ -29,6 +29,14 @@ class Muser(models.Model):
     def __str__(self):
         return self.user.username + '/'+ str(self.id)
 
+class Contact(models.Model):
+    name = models.CharField(max_length=20,default="")
+    email = models.CharField(max_length=30,default="")
+    subject = models.CharField()
+    message = models.CharField()
+
+    def __str__(self):
+        return self.name
 
 class Songtype(models.Model):
     name = models.CharField(max_length=20,default="")

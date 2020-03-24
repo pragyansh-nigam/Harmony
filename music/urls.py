@@ -8,6 +8,7 @@ urlpatterns = [
     path('about/',views.aboutpage),
     path('info/',views.infopage),
     path('contact/',views.contactpage),
+    path('contact',views.contact),
     # login/register (user)(artist)
     path("login/",views.userlogin),
     path("register/",views.register),

@@ -244,11 +244,12 @@
 				<div class="col-lg-12">
 					<div class="contact_form_container">
 						<div class="contact_title">Send us a message</div>
-						<form action="#" class="contact_form" id="contact_form">
-							<input type="text" class="contact_input" placeholder="Name" required="required">
-							<input type="email" class="contact_input" placeholder="E-mail" required="required">
-							<input type="text" class="contact_input" placeholder="Subject">
-							<textarea class="contact_input contact_textarea" placeholder="Message" required="required"></textarea>
+						<form action="/music/contact" method="post" class="contact_form" id="contact_form">
+							{% csrf_token %}
+							<input type="text" name="name" class="contact_input" placeholder="Name" required="required">
+							<input type="email" name="email" class="contact_input" placeholder="E-mail" required="required">
+							<input type="text" name="subject" class="contact_input" placeholder="Subject">
+							<textarea class="contact_input contact_textarea" name="message" placeholder="Message" required="required"></textarea>
 							<button class="contact_button">Send Message</button>
 						</form>
 					</div>

@@ -20,7 +20,7 @@ def aboutpage(req):
     songcount = Song.objects.all().count()
     tourcount = Tour.objects.all().count()
     usercount = User.objects.all().count()
-    artistcount = Artist.objects.all().count()
+    artistcount = Artist.objects.filter(status=1).count()
     context = {
         'songcount':songcount,
         'tourcount':tourcount,
@@ -34,7 +34,7 @@ def infopage(req):
     songcount = Song.objects.all().count()
     tourcount = Tour.objects.all().count()
     usercount = User.objects.all().count()
-    artistcount = Artist.objects.all().count()
+    artistcount = Artist.objects.filter(status=1).count()
     context = {
         'songcount':songcount,
         'tourcount':tourcount,
@@ -51,6 +51,17 @@ def register(req):
 
 def userlogin(req):
     return render(req,"login.html")
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        subject = request.POST['subject']
+        message = request.POST['message']
+
+        c = Contact(name=name,email=email,subject=subject,message=message)
+        c.save()
+        return redirect('/music/contact')
 
 def reg(request):
     if request.method == 'POST':
@@ -297,7 +308,7 @@ def homePage(req):
         songgenres = Songgenre.objects.all()
         songs = Song.objects.order_by('-clickCount')[0:10]
         # artist = Artist.objects.order_by('-songcount')[0:2]
-        top = Artist.objects.order_by('-fcount')[0]
+        top = Artist.objects.filter(status=1).order_by('-fcount')[0]
         artist = Artist.objects.filter(status=1).order_by('-fcount')[0:10]
         print(artist)
         tops = Song.objects.order_by('-clickCount')[0]
